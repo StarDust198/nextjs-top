@@ -7,4 +7,5 @@ export interface ButtonProps
   > {
   appearance: 'primary' | 'ghost';
   children: ReactNode;
+  arrow?: 'right' | 'down' | 'none';
 }
