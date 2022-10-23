@@ -6,6 +6,7 @@ import { MenuItem } from '../../interfaces/menu.interface';
 import { TopPageModel } from '../../interfaces/page.interface';
 import { ParsedUrlQuery } from 'node:querystring';
 import { ProductModel } from '../../interfaces/product.interface';
+import { useRouter } from 'next/router';
 
 const firstCategory = 0;
 
