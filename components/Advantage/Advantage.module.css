@@ -1,0 +1,22 @@
+.advantage {
+	display: grid;
+	grid-template-columns: 50px 1fr;
+	grid-template-rows: 50px;
+	gap: 10px 40px;
+	margin-bottom: 30px;
+}
+
+.left {
+	display: grid;
+	gap: 17px;
+	grid-template-rows: 50px 1fr;
+	justify-items: center;
+}
+
+.advantage h3 {
+	align-self: center;
+}
+
+.line {
+	border-left: 1px solid var(--gray-light);
+}

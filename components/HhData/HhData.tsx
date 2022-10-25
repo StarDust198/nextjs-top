@@ -1,6 +1,5 @@
 import { HhDataProps } from './HhData.props';
 import styles from './HhData.module.css';
-import cn from 'classnames';
 import { FC } from 'react';
 import { Card } from '../Card/Card';
 import RatingIcon from './Rating.svg';

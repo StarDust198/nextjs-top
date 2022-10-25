@@ -2,7 +2,7 @@ import { TopPageComponentProps } from './TopPageComponent.props';
 import styles from './TopPageComponent.module.css';
 import cn from 'classnames';
 import { FC } from 'react';
-import { HhData, Htag, Tag } from '../../components';
+import { Advantage, HhData, Htag, P, Tag } from '../../components';
 import { TopLevelCategory } from '../../interfaces/page.interface';
 
 export const TopPageComponent: FC<TopPageComponentProps> = ({
@@ -30,7 +30,35 @@ export const TopPageComponent: FC<TopPageComponentProps> = ({
           hh.ru
         </Tag>
       </div>
-      {firstCategory === TopLevelCategory.Courses && <HhData {...page.hh} />}
+
+      {firstCategory === TopLevelCategory.Courses && page.hh && (
+        <HhData {...page.hh} />
+      )}
+
+      {page.advantages && page.advantages.length > 0 && (
+        <div className={styles.advantages}>
+          <Htag tag="h2">Преимущества</Htag>
+          {page.advantages.map((adv) => (
+            <Advantage key={adv._id} {...adv} />
+          ))}
+        </div>
+      )}
+
+      {page.seoText && (
+        <div
+          className={styles.seo}
+          dangerouslySetInnerHTML={{ __html: page.seoText }}
+        />
+      )}
+
+      <Htag tag="h2">Получаемые навыки</Htag>
+      <div className={styles.tags}>
+        {page.tags.map((tag) => (
+          <Tag color="primary" key={tag}>
+            {tag}
+          </Tag>
+        ))}
+      </div>
     </div>
   );
 };
