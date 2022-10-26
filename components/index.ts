@@ -8,3 +8,5 @@ export * from './HhData/HhData';
 export * from './Advantage/Advantage';
 export * from './Sort/Sort';
 export * from './Input/Input';
+export * from './Textarea/Textarea';
+export * from './Search/Search';

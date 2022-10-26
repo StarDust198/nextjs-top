@@ -4,12 +4,13 @@ import cn from 'classnames';
 import { FC } from 'react';
 import { Menu } from '../Menu/Menu';
 import Logo from '../logo.svg';
+import { Search } from '../../components';
 
 export const Sidebar: FC<SidebarProps> = ({ className, ...props }) => {
   return (
     <div className={cn(className, styles.sidebar)} {...props}>
       <Logo className={styles.logo} />
-      <div className={cn(styles.search)}>Search</div>
+      <Search />
       <Menu />
     </div>
   );
