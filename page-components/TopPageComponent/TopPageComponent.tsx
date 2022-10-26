@@ -1,15 +1,26 @@
 import { TopPageComponentProps } from './TopPageComponent.props';
 import styles from './TopPageComponent.module.css';
 import cn from 'classnames';
-import { FC } from 'react';
-import { Advantage, HhData, Htag, P, Tag } from '../../components';
+import { FC, useReducer } from 'react';
+import { Advantage, HhData, Htag, P, Sort, Tag } from '../../components';
 import { TopLevelCategory } from '../../interfaces/page.interface';
+import { SortEnum } from '../../components/Sort/Sort.props';
+import { sortReducer } from './sort.reducer';
 
 export const TopPageComponent: FC<TopPageComponentProps> = ({
   page,
   firstCategory,
   products,
 }) => {
+  const [{ products: sortedProducts, sort }, dispatchSort] = useReducer(
+    sortReducer,
+    { products, sort: SortEnum.rating }
+  );
+
+  const onSort = (sort: SortEnum): void => {
+    dispatchSort({ type: sort });
+  };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.title}>
@@ -19,10 +30,11 @@ export const TopPageComponent: FC<TopPageComponentProps> = ({
             {products.length}
           </Tag>
         )}
-        <span>Sorting</span>
+        <Sort sort={sort} setSort={onSort} />
       </div>
       <div>
-        {products && products.map((p) => <div key={p._id}>{p.title}</div>)}
+        {sortedProducts &&
+          sortedProducts.map((p) => <div key={p._id}>{p.title}</div>)}
       </div>
       <div className={cn(styles.title, styles.hhTitle)}>
         <Htag tag="h2">Вакансии - {page.category}</Htag>
