@@ -36,6 +36,7 @@
 
 .credit {
 	grid-area: credit;
+	white-space: nowrap;
 }
 
 .rating {
@@ -155,6 +156,17 @@
 	margin-left: 20px;
 }
 
+.reviewsOpen {
+	padding: 30px;
+	max-height: auto;
+}
+
+.reviewsClosed {
+	overflow: hidden;
+	padding: 0;
+	max-height: 0;
+}
+
 @media (max-width: 1320px) {
 	.product {
 		grid-template-columns: 70px 30px auto 30px auto 30px 1fr;
@@ -172,7 +184,7 @@
 	}
 
 	.features {
-		padding-right: unset;
+		padding-right: 40px;
 		margin-bottom: 15px;
 	}
 
@@ -182,6 +194,31 @@
 
 	.tags {
 		margin-bottom: 15px;
+	}
+}
+
+@media (max-width: 900px) and (min-width: 765px) {
+	.product {
+				grid-template-areas: 
+			"logo . title title title title title"
+			"logo . tags tags tags tags tags"
+			"priceTitle priceTitle price price price price price"
+			"creditTitle creditTitle credit credit credit credit credit"
+			"ratingTitle ratingTitle rating rating rating rating rating"
+			"hr hr hr hr hr hr hr"
+			"description description description description description description description"
+			"features features features features features features features"
+			"advBlock advBlock advBlock advBlock advBlock advBlock advBlock"
+			"hr2 hr2 hr2 hr2 hr2 hr2 hr2"
+			"actions actions actions actions actions actions actions";
+	}
+
+	.price {
+		margin-bottom: 10px;
+	}
+
+	.credit {
+		margin-bottom: 10px;
 	}
 }
 
@@ -208,6 +245,10 @@
 
 	.credit {
 		margin-bottom: 10px;
+	}
+
+	.features {
+		padding-right: unset;
 	}
 }
 
