@@ -32,8 +32,27 @@ export const firstLevelMenu: FirstLevelMenuItem[] = [
   },
 ];
 
+// Форматирование цены
 export const priceRu = (price: number): string =>
   price
     .toString()
     .replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
     .concat(' ₽');
+
+// Склонение множественных чисел
+export const declOfNum = (
+  num: number,
+  titles: [string, string, string]
+): string => {
+  const div100 = num % 100;
+  const div10 = num % 10;
+  return `${num} ${
+    titles[
+      div10 === 0 || div10 > 4 || (div100 > 10 && div100 < 20)
+        ? 2
+        : div10 > 1
+        ? 1
+        : 0
+    ]
+  }`;
+};

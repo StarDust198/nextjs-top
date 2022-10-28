@@ -38,3 +38,15 @@
 	margin-top: 15px;
 	margin-bottom: 5px;
 }
+
+.tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 5px;
+}
+
+@media (max-width: 640px) {
+	.title {
+		grid-template-columns: auto 1fr;
+	}
+}
