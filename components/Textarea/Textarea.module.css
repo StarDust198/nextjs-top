@@ -12,8 +12,24 @@
 	font-family: var(--font-family);
 	display: block;
 	resize:none;
+	width: 100%;
 }
 
 .textarea::placeholder {
 	color: var(--gray);
+}
+
+.error {
+	border: 1px solid var(--red);
+}
+
+.textareaWrapper {
+	position: relative;
+}
+
+.errorMessage {
+	color: var(--red);
+	position: absolute;
+	bottom: -20px;
+	left: 0;
 }
