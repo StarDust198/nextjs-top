@@ -1,7 +1,7 @@
 import { TopPageComponentProps } from './TopPageComponent.props';
 import styles from './TopPageComponent.module.css';
 import cn from 'classnames';
-import { FC, useReducer } from 'react';
+import { FC, useEffect, useReducer } from 'react';
 import {
   Advantage,
   HhData,
@@ -20,13 +20,17 @@ export const TopPageComponent: FC<TopPageComponentProps> = ({
   firstCategory,
   products,
 }) => {
-  const [{ products: sortedProducts, sort }, dispatchSort] = useReducer(
+  const [{ products: sortedProducts, sort }, dispatch] = useReducer(
     sortReducer,
     { products, sort: SortEnum.rating }
   );
 
+  useEffect(() => {
+    dispatch({ type: 'updateProducts', payload: products });
+  }, [products]);
+
   const onSort = (sort: SortEnum): void => {
-    dispatchSort({ type: sort });
+    dispatch({ type: 'sort', payload: sort });
   };
 
   return (
@@ -42,7 +46,7 @@ export const TopPageComponent: FC<TopPageComponentProps> = ({
       </div>
       <div>
         {sortedProducts &&
-          sortedProducts.map((p) => <Product key={p._id} product={p} />)}
+          sortedProducts.map((p) => <Product layout key={p._id} product={p} />)}
       </div>
       <div className={cn(styles.title, styles.hhTitle)}>
         <Htag tag="h2">Вакансии - {page.category}</Htag>
