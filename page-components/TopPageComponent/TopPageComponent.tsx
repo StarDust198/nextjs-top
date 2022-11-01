@@ -2,15 +2,7 @@ import { TopPageComponentProps } from './TopPageComponent.props';
 import styles from './TopPageComponent.module.css';
 import cn from 'classnames';
 import { FC, useEffect, useReducer } from 'react';
-import {
-  Advantage,
-  HhData,
-  Htag,
-  P,
-  Product,
-  Sort,
-  Tag,
-} from '../../components';
+import { Advantage, HhData, Htag, Product, Sort, Tag } from '../../components';
 import { TopLevelCategory } from '../../interfaces/page.interface';
 import { SortEnum } from '../../components/Sort/Sort.props';
 import { sortReducer } from './sort.reducer';
