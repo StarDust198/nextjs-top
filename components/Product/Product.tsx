@@ -27,17 +27,18 @@ export const Product = motion(
         visible: {
           height: 'auto',
           opacity: 1,
-          transition: { duration: 1 },
         },
-        hidden: { height: 0, opacity: 0, transition: { duration: 1 } },
+        hidden: { height: 0, opacity: 0 },
       };
 
       const scrollToReviews = (): void => {
         setReviewsOpen(true);
-        reviewRef.current?.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start',
-        });
+        setTimeout(() => {
+          reviewRef.current?.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+          });
+        }, 5);
       };
 
       return (
@@ -130,6 +131,7 @@ export const Product = motion(
             animate={reviewsOpen ? 'visible' : 'hidden'}
             variants={variants}
             className={styles.reviewsWrapper}
+            transition={{ duration: 1 }}
           >
             <Card className={styles.reviews} color="blue" ref={reviewRef}>
               {product.reviews.map((r) => (

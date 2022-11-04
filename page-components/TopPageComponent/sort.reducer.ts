@@ -33,7 +33,9 @@ export const sortReducer = (
     case 'updateProducts':
       return {
         sort: SortEnum.rating,
-        products: action.payload,
+        products: action.payload.sort((a, b) =>
+          a.initialRating > b.initialRating ? -1 : 1
+        ),
       };
     default:
       throw new Error('Неправильное изменение состояния');

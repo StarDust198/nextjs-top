@@ -3,6 +3,7 @@ import styles from './Button.module.css';
 import ArrowIcon from './arrow.svg';
 import cn from 'classnames';
 import { FC } from 'react';
+import { motion } from 'framer-motion';
 
 export const Button: FC<ButtonProps> = ({
   appearance,
@@ -12,7 +13,8 @@ export const Button: FC<ButtonProps> = ({
   ...props
 }) => {
   return (
-    <button
+    <motion.button
+      whileHover={{ scale: 1.05 }}
       className={cn(styles.button, className, {
         [styles.primary]: appearance === 'primary',
         [styles.ghost]: appearance === 'ghost',
@@ -29,6 +31,6 @@ export const Button: FC<ButtonProps> = ({
           <ArrowIcon />
         </span>
       )}
-    </button>
+    </motion.button>
   );
 };

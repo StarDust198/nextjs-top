@@ -14,7 +14,7 @@ export const Sort: FC<SortProps> = ({ sort, setSort, className, ...props }) => {
         })}
       >
         <SortIcon className={styles.sortIcon} />
-        По рейтингу
+        По&nbsp;рейтингу
       </span>
       <span
         onClick={(): void => setSort(SortEnum.price)}
@@ -23,7 +23,7 @@ export const Sort: FC<SortProps> = ({ sort, setSort, className, ...props }) => {
         })}
       >
         <SortIcon className={styles.sortIcon} />
-        По цене
+        По&nbsp;цене
       </span>
     </div>
   );

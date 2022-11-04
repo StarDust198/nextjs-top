@@ -1,9 +1,17 @@
 .title {
 	display: grid;
-	grid-template-columns: auto 1fr auto;
-	align-items: baseline;
+	grid-template-columns: 1fr auto;
+	align-items: center;
 	justify-items: left;
 	gap: 20px;
+}
+
+.titleText {
+	display: inline;
+}
+
+.titleTag {
+	vertical-align: super;
 }
 
 .hhTitle {
@@ -47,6 +55,6 @@
 
 @media (max-width: 640px) {
 	.title {
-		grid-template-columns: auto 1fr;
+		grid-template-columns: 1fr;
 	}
 }

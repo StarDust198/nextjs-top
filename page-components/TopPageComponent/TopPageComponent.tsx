@@ -28,17 +28,29 @@ export const TopPageComponent: FC<TopPageComponentProps> = ({
   return (
     <div className={styles.wrapper}>
       <div className={styles.title}>
-        <Htag tag="h1">{page.title}</Htag>
-        {products && (
-          <Tag color="gray" size="m">
-            {products.length}
-          </Tag>
-        )}
+        <div>
+          <Htag className={styles.titleText} tag="h1">
+            {page.title}
+          </Htag>
+          &nbsp;&nbsp;
+          {products && (
+            <Tag className={styles.titleTag} color="gray" size="m">
+              {products.length}
+            </Tag>
+          )}
+        </div>
         <Sort sort={sort} setSort={onSort} />
       </div>
       <div>
         {sortedProducts &&
-          sortedProducts.map((p) => <Product layout key={p._id} product={p} />)}
+          sortedProducts.map((p) => (
+            <Product
+              layout
+              transition={{ duration: 0.6 }}
+              key={p._id}
+              product={p}
+            />
+          ))}
       </div>
       <div className={cn(styles.title, styles.hhTitle)}>
         <Htag tag="h2">Вакансии - {page.category}</Htag>
