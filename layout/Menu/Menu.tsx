@@ -1,6 +1,6 @@
 import styles from './Menu.module.css';
 import cn from 'classnames';
-import { FC, useContext } from 'react';
+import { FC, useContext, KeyboardEvent } from 'react';
 import { AppContext } from '../../context/app.context';
 import { FirstLevelMenuItem, PageItem } from '../../interfaces/menu.interface';
 import Link from 'next/link';
@@ -48,6 +48,16 @@ export const Menu: FC = () => {
       );
   };
 
+  const openSecondLevelKey = (
+    e: KeyboardEvent,
+    secondCategory: string
+  ): void => {
+    if (e.code === 'Space' || e.code === 'Enter') {
+      e.preventDefault();
+      openSecondLevel(secondCategory);
+    }
+  };
+
   const buildFirstLevel = (): JSX.Element => {
     return (
       <>
@@ -87,6 +97,10 @@ export const Menu: FC = () => {
               <div
                 className={styles.secondLevel}
                 onClick={(): void => openSecondLevel(m._id.secondCategory)}
+                onKeyDown={(e: KeyboardEvent): void =>
+                  openSecondLevelKey(e, m._id.secondCategory)
+                }
+                tabIndex={0}
               >
                 {m._id.secondCategory}
               </div>
@@ -97,7 +111,7 @@ export const Menu: FC = () => {
                 initial={m.isOpen ? 'visible' : 'hidden'}
                 animate={m.isOpen ? 'visible' : 'hidden'}
               >
-                {buildThirdLevel(m.pages, menuItem.route)}
+                {buildThirdLevel(m.pages, menuItem.route, m.isOpen ?? false)}
               </motion.div>
             </div>
           );
@@ -106,11 +120,16 @@ export const Menu: FC = () => {
     );
   };
 
-  const buildThirdLevel = (pages: PageItem[], route: string): JSX.Element[] => {
+  const buildThirdLevel = (
+    pages: PageItem[],
+    route: string,
+    isOpen: boolean
+  ): JSX.Element[] => {
     return pages.map((p) => (
       <motion.div key={p._id} variants={variantsChildren}>
         <Link href={`/${route}/${p.alias}`}>
           <a
+            tabIndex={isOpen ? 0 : -1}
             className={cn(styles.thirdLevel, {
               [styles.thirdLevelActive]:
                 `/${route}/${p.alias}` === router.asPath,

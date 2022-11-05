@@ -15,6 +15,7 @@
 }
 
 .body {
+	outline: none;
 	grid-area: body;
 }
 
@@ -24,6 +25,20 @@
 
 .footer {
 	grid-area: footer;
+}
+
+.skipLink {
+	background-color: var(--primary);
+	color: var(white);
+	position: fixed;
+	top: 0;
+	left: 30px;
+	height: 0;
+	overflow: hidden;
+}
+
+.showSkipLink {
+	height: auto;
 }
 
 @media (max-width: 765px) {

@@ -147,7 +147,7 @@
 }
 
 .advantages {
-	border-left: 2px solid var(--green);
+	border-left: 2px solid var(--green-light);
 	padding-left: 15px;
 	margin-bottom: 25px;
 }
