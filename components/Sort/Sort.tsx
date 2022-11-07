@@ -7,24 +7,33 @@ import SortIcon from './sort.svg';
 export const Sort: FC<SortProps> = ({ sort, setSort, className, ...props }) => {
   return (
     <div className={cn(styles.sort, className)} {...props}>
-      <span
+      <div id="sort" className="dNone">
+        Сортировка
+      </div>
+      <button
+        id="rating"
         onClick={(): void => setSort(SortEnum.rating)}
         className={cn({
           [styles.active]: sort === SortEnum.rating,
         })}
+        aria-selected={sort === SortEnum.rating}
+        aria-labelledby="sort rating"
       >
         <SortIcon className={styles.sortIcon} />
         По&nbsp;рейтингу
-      </span>
-      <span
+      </button>
+      <button
+        id="price"
         onClick={(): void => setSort(SortEnum.price)}
         className={cn({
           [styles.active]: sort === SortEnum.price,
         })}
+        aria-selected={sort === SortEnum.price}
+        aria-labelledby="sort price"
       >
         <SortIcon className={styles.sortIcon} />
         По&nbsp;цене
-      </span>
+      </button>
     </div>
   );
 };

@@ -120,7 +120,7 @@
 	margin-left: 5px;
 }
 
-.credit span, .priceTitle, .creditTitle, .ratingTitle {
+.credit .smaller, .priceTitle, .creditTitle, .ratingTitle {
 	font-size: 14px;
 	line-height: 19px;
 }

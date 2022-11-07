@@ -8,10 +8,10 @@ import { Search } from '../../components';
 
 export const Sidebar: FC<SidebarProps> = ({ className, ...props }) => {
   return (
-    <div className={cn(className, styles.sidebar)} {...props}>
+    <aside className={cn(className, styles.sidebar)} {...props}>
       <Logo className={styles.logo} />
       <Search />
       <Menu />
-    </div>
+    </aside>
   );
 };

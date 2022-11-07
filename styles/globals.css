@@ -34,3 +34,14 @@ a {
 	--green-light: #C8F8E4;
 	--font-family: "Noto Sans", sans-serif;
 }
+
+.vHidden {
+	width: 0;
+	height: 0;
+	position: absolute;
+	overflow: hidden;
+}
+
+.dNone {
+	display: none;
+}

@@ -34,7 +34,12 @@ export const TopPageComponent: FC<TopPageComponentProps> = ({
           </Htag>
           &nbsp;&nbsp;
           {products && (
-            <Tag className={styles.titleTag} color="gray" size="m">
+            <Tag
+              className={styles.titleTag}
+              color="gray"
+              size="m"
+              aria-label={products.length + ' элементов'}
+            >
               {products.length}
             </Tag>
           )}

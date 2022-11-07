@@ -14,6 +14,7 @@ import axios from 'axios';
 
 export const ReviewForm: FC<ReviewFormProps> = ({
   productId,
+  isOpen,
   className,
   ...props
 }) => {
@@ -23,11 +24,12 @@ export const ReviewForm: FC<ReviewFormProps> = ({
     handleSubmit,
     formState: { errors },
     reset,
+    clearErrors,
   } = useForm<IReviewForm>();
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
   const [error, setError] = useState<string>();
 
-  const onSubmit = async (formData: IReviewForm) => {
+  const onSubmit = async (formData: IReviewForm): Promise<void> => {
     try {
       const { data } = await axios.post<IReviewSentResponse>(
         API.review.createDemo,
@@ -59,6 +61,8 @@ export const ReviewForm: FC<ReviewFormProps> = ({
           className={styles.name}
           placeholder="Имя"
           error={errors.name}
+          tabIndex={isOpen ? 0 : -1}
+          aria-invalid={!!errors.name}
         />
         <Input
           {...register('title', {
@@ -67,6 +71,8 @@ export const ReviewForm: FC<ReviewFormProps> = ({
           className={styles.title}
           placeholder="Заголовок отзыва"
           error={errors.title}
+          tabIndex={isOpen ? 0 : -1}
+          aria-invalid={!!errors.title}
         />
         <div className={styles.rating}>
           <span>Оценка:</span>
@@ -81,6 +87,7 @@ export const ReviewForm: FC<ReviewFormProps> = ({
                 setRating={field.onChange}
                 ref={field.ref}
                 error={errors.rating}
+                tabIndex={isOpen ? 0 : -1}
               />
             )}
           />
@@ -92,9 +99,18 @@ export const ReviewForm: FC<ReviewFormProps> = ({
           className={styles.description}
           placeholder="Текст отзыва"
           error={errors.description}
+          tabIndex={isOpen ? 0 : -1}
+          aria-label="Текст отзыва"
+          aria-invalid={!!errors.description}
         />
         <div className={styles.submit}>
-          <Button appearance="primary">Отправить</Button>
+          <Button
+            appearance="primary"
+            tabIndex={isOpen ? 0 : -1}
+            onClick={(): void => clearErrors()}
+          >
+            Отправить
+          </Button>
           <span className={styles.info}>
             * Перед публикацией отзыв пройдет предварительную модерацию и
             проверку
@@ -103,18 +119,21 @@ export const ReviewForm: FC<ReviewFormProps> = ({
       </div>
 
       {isSuccess && (
-        <div className={cn(styles.panel, styles.success)}>
+        <div role="alert" className={cn(styles.panel, styles.success)}>
           <div className={styles.successTitle}>Ваш отзыв отправлен</div>
           <div>Отзыв будет опубликован после проверки</div>
-          <CloseIcon
+          <button
             className={styles.close}
             onClick={(): void => setIsSuccess(false)}
-          />
+            aria-label="закрыть оповещение"
+          >
+            <CloseIcon />
+          </button>
         </div>
       )}
 
       {error && (
-        <div className={cn(styles.panel, styles.error)}>
+        <div role="alert" className={cn(styles.panel, styles.error)}>
           Что-то пошло не так, попробуйте обновить страницу
           <CloseIcon
             className={styles.close}

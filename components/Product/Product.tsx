@@ -38,6 +38,7 @@ export const Product = motion(
             behavior: 'smooth',
             block: 'start',
           });
+          reviewRef.current?.focus();
         }, 5);
       };
 
@@ -56,17 +57,28 @@ export const Product = motion(
               {product.title}
             </Htag>
             <div className={styles.price}>
-              {priceRu(product.price)}
+              <span>
+                <span className="vHidden">цена </span>
+                {priceRu(product.price)}
+              </span>
               {product.oldPrice && (
                 <Tag className={styles.discount} color="green">
+                  <span className="vHidden">скидка </span>
                   {priceRu(product.price - product.oldPrice)}
                 </Tag>
               )}
             </div>
             <div className={styles.credit}>
-              {priceRu(product.credit)}/<span>мес</span>
+              <span>
+                <span className="vHidden">в кредит </span>
+                {priceRu(product.credit)}/
+                <span className={styles.smaller}>мес</span>
+              </span>
             </div>
             <div className={styles.rating}>
+              <span className="vHidden">
+                {`рейтинг ${product.reviewAvg ?? product.initialRating}`}
+              </span>
               <Rating rating={product.reviewAvg ?? product.initialRating} />
             </div>
             <div className={styles.tags}>
@@ -76,8 +88,12 @@ export const Product = motion(
                 </Tag>
               ))}
             </div>
-            <div className={styles.priceTitle}>цена</div>
-            <div className={styles.creditTitle}>в кредит</div>
+            <div className={styles.priceTitle} aria-hidden>
+              цена
+            </div>
+            <div className={styles.creditTitle} aria-hidden>
+              в кредит
+            </div>
             <div className={styles.ratingTitle}>
               <a href="#ref" onClick={scrollToReviews}>
                 {declOfNum(product.reviewCount, ['отзыв', 'отзыва', 'отзывов'])}
@@ -118,6 +134,7 @@ export const Product = motion(
               <Button
                 appearance="ghost"
                 arrow={reviewsOpen ? 'down' : 'right'}
+                aria-expanded={reviewsOpen}
                 onClick={(): void =>
                   setReviewsOpen((revOpen: boolean) => !revOpen)
                 }
@@ -133,14 +150,19 @@ export const Product = motion(
             className={styles.reviewsWrapper}
             transition={{ duration: 1 }}
           >
-            <Card className={styles.reviews} color="blue" ref={reviewRef}>
+            <Card
+              className={styles.reviews}
+              color="blue"
+              ref={reviewRef}
+              tabIndex={reviewsOpen ? 0 : -1}
+            >
               {product.reviews.map((r) => (
                 <Fragment key={r._id}>
                   <Review review={r} />
                   <Divider />
                 </Fragment>
               ))}
-              <ReviewForm productId={product._id} />
+              <ReviewForm productId={product._id} isOpen={reviewsOpen} />
             </Card>
           </motion.div>
         </div>

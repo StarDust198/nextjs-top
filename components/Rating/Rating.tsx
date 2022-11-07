@@ -42,12 +42,7 @@ export const Rating = forwardRef(
             onMouseLeave={(): void => changeDisplay(rating)}
             onClick={(): void => onClickStar(i + 1)}
           >
-            <StarIcon
-              tabIndex={isEditable ? 0 : -1}
-              onKeyDown={(e: KeyboardEvent<SVGElement>): void =>
-                onKeyPress(i + 1, e)
-              }
-            />
+            <StarIcon />
           </span>
         );
       });
@@ -64,9 +59,32 @@ export const Rating = forwardRef(
       setRating(i);
     };
 
-    const onKeyPress = (i: number, e: KeyboardEvent<SVGElement>): void => {
-      if ((e.code !== 'Space' && e.code !== 'Enter') || !setRating) return;
-      setRating(i);
+    const onKeyPress = (e: KeyboardEvent): void => {
+      if (
+        !(
+          e.code === 'ArrowRight' ||
+          e.code === 'ArrowLeft' ||
+          e.code === 'ArrowUp' ||
+          e.code === 'ArrowDown'
+        ) ||
+        !setRating ||
+        !isEditable
+      )
+        return;
+
+      e.preventDefault();
+
+      switch (e.code) {
+        case 'ArrowRight':
+        case 'ArrowUp':
+          if (rating < 5) setRating(rating + 1);
+          if (!rating) setRating(1);
+          break;
+        case 'ArrowLeft':
+        case 'ArrowDown':
+          if (rating > 1) setRating(rating - 1);
+          break;
+      }
     };
 
     return (
@@ -78,13 +96,25 @@ export const Rating = forwardRef(
           },
           className
         )}
+        tabIndex={isEditable ? 0 : -1}
         {...props}
+        onKeyDown={onKeyPress}
         ref={ref}
+        role={isEditable ? 'slider' : ''}
+        aria-valuenow={rating}
+        aria-valuemin={1}
+        aria-valuemax={5}
+        aria-label={isEditable ? 'укажите рейтинг' : 'рейтинг ' + rating}
+        aria-invalid={!!error}
       >
         {ratingArr.map((r, i) => (
           <span key={i}>{r}</span>
         ))}
-        {error && <span className={styles.errorMessage}>{error.message}</span>}
+        {error && (
+          <span role="alert" className={styles.errorMessage}>
+            {error.message}
+          </span>
+        )}
       </div>
     );
   }

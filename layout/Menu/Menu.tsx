@@ -142,5 +142,5 @@ export const Menu: FC = () => {
     ));
   };
 
-  return <div>{buildFirstLevel()}</div>;
+  return <nav role="navigation">{buildFirstLevel()}</nav>;
 };
