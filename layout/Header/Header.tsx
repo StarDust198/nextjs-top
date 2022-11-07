@@ -4,13 +4,14 @@ import cn from 'classnames';
 import { FC, useEffect, useState } from 'react';
 import Logo from '../logo.svg';
 import { ButtonIcon } from '../../components';
-import { motion } from 'framer-motion';
+import { motion, useReducedMotion } from 'framer-motion';
 import { Sidebar } from '../Sidebar/Sidebar';
 import { useRouter } from 'next/router';
 
 export const Header: FC<HeaderProps> = ({ className, ...props }) => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
   const router = useRouter();
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     setMenuOpen(false);
@@ -18,9 +19,11 @@ export const Header: FC<HeaderProps> = ({ className, ...props }) => {
 
   const variants = {
     visible: {
+      opacity: 1,
       x: 0,
     },
     hidden: {
+      opacity: shouldReduceMotion ? 1 : 0,
       x: '100%',
     },
   };

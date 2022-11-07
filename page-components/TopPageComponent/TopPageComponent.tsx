@@ -1,11 +1,12 @@
 import { TopPageComponentProps } from './TopPageComponent.props';
 import styles from './TopPageComponent.module.css';
 import cn from 'classnames';
-import { FC, useEffect, useReducer } from 'react';
+import React, { FC, Fragment, useEffect, useReducer } from 'react';
 import { Advantage, HhData, Htag, Product, Sort, Tag } from '../../components';
 import { TopLevelCategory } from '../../interfaces/page.interface';
 import { SortEnum } from '../../components/Sort/Sort.props';
 import { sortReducer } from './sort.reducer';
+import { useReducedMotion } from 'framer-motion';
 
 export const TopPageComponent: FC<TopPageComponentProps> = ({
   page,
@@ -16,6 +17,7 @@ export const TopPageComponent: FC<TopPageComponentProps> = ({
     sortReducer,
     { products, sort: SortEnum.rating }
   );
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     dispatch({ type: 'updateProducts', payload: products });
@@ -46,12 +48,13 @@ export const TopPageComponent: FC<TopPageComponentProps> = ({
         </div>
         <Sort sort={sort} setSort={onSort} />
       </div>
-      <div>
+      <div role="list">
         {sortedProducts &&
           sortedProducts.map((p) => (
             <Product
-              layout
+              layout={!!shouldReduceMotion}
               transition={{ duration: 0.6 }}
+              role="listitem"
               key={p._id}
               product={p}
             />
@@ -72,7 +75,9 @@ export const TopPageComponent: FC<TopPageComponentProps> = ({
         <div className={styles.advantages}>
           <Htag tag="h2">Преимущества</Htag>
           {page.advantages.map((adv) => (
-            <Advantage key={adv._id} {...adv} />
+            <Fragment key={adv._id}>
+              {adv.title && <Advantage {...adv} />}
+            </Fragment>
           ))}
         </div>
       )}
