@@ -52,8 +52,8 @@ export const TopPageComponent: FC<TopPageComponentProps> = ({
         {sortedProducts &&
           sortedProducts.map((p) => (
             <Product
-              layout={!!shouldReduceMotion}
-              transition={{ duration: 0.6 }}
+              layout
+              transition={{ duration: shouldReduceMotion ? 0 : 1 }}
               role="listitem"
               key={p._id}
               product={p}

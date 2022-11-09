@@ -23,7 +23,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
   return (
     <div className={styles.wrapper}>
       <a
-        tabIndex={1}
+        tabIndex={0}
         className={cn(styles.skipLink, {
           [styles.showSkipLink]: showSkip,
         })}
