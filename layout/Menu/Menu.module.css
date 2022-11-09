@@ -1,11 +1,13 @@
 .firstLevel {
 	display: grid;
-	gap: 20px;
-	grid-template-columns: 24px 1fr;
 	align-items: center;
+
+	margin-top: 20px;
+
 	font-size: 18px;
 	line-height: 25px;
-	margin-top: 20px;
+	gap: 20px;
+	grid-template-columns: 24px 1fr;
 }
 
 .firstLevelActive,
@@ -19,15 +21,18 @@
 }
 
 .secondLevel {
-	font-weight: 300;
-	font-size: 12px;
-	line-height: 16px;
-	color: var(--gray-dark);
-	text-transform: uppercase;
 	margin-bottom: 10px;
-	background: none;
-	border: none;
 	padding: 0;
+
+	text-transform: uppercase;
+
+	color: var(--gray-dark);
+	border: none;
+	background: none;
+
+	font-size: 12px;
+	font-weight: 300;
+	line-height: 16px;
 }
 
 .secondLevelBlock {
@@ -38,15 +43,18 @@
 	margin-top: 15px;
 	margin-left: 12px;
 	padding-left: 32px;
+
 	border-left: 1px solid #DFDFDF;
 }
 
 .thirdLevel {
 	display: block;
-	font-weight: 500;
-	font-size: 14px;
-	color:var(--gray-dark);
+
+	color: var(--gray-dark);
 	outline-offset: -1px;
+
+	font-size: 14px;
+	font-weight: 500;
 }
 
 .thirdLevelActive,

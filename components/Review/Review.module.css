@@ -1,8 +1,10 @@
 .review {
 	display: grid;
 	grid-template-columns: [start] auto 1fr auto auto [end];
+
 	align-items: center;
 	gap: 10px;
+
 	font-size: 14px;
 	line-height: 24px;
 }
@@ -33,7 +35,6 @@
 	}
 }
 
-
 @media (max-width: 640px) {
 	.review {
 		grid-template-columns: [start] 30px 1fr [end];
@@ -47,4 +48,3 @@
 		grid-column: start / end;
 	}
 }
-

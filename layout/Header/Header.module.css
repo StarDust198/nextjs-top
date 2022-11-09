@@ -4,21 +4,24 @@
 
 .mobileMenu {
 	position: fixed;
-	background: #F5F6F8;
-	padding: 20px 15px;
-	overflow-y: scroll;
-	top: 0;
-	bottom: 0;
-	right: 0;
-	left: 0;
 	z-index: 10;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+
+	overflow-y: scroll;
+
+	padding: 20px 15px;
+
+	background: #F5F6F8;
 }
 
 .menuClose {
 	position: fixed;
+	z-index: 15;
 	top: 15px;
 	right: 15px;
-	z-index: 15;
 }
 
 @media (max-width: 765px) {
@@ -26,6 +29,7 @@
 		display: grid;
 		grid-template-columns: 1fr 40px;
 		gap: 10px;
-		padding: 15px 15px 0 15px;
+
+		padding: 15px 15px 0;
 	}
 }
