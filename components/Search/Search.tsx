@@ -1,7 +1,7 @@
 import { SearchProps } from './Search.props';
 import styles from './Search.module.css';
 import cn from 'classnames';
-import { FC, KeyboardEvent, useState } from 'react';
+import { FC, FormEvent, useState } from 'react';
 import { Input } from '../Input/Input';
 import { Button } from '../Button/Button';
 import GlassIcon from './glass.svg';
@@ -21,25 +21,27 @@ export const Search: FC<SearchProps> = ({ className, ...props }) => {
     });
   };
 
-  const handleKeyDown = (e: KeyboardEvent): void => {
-    if (e.key === 'Enter') {
-      goToSearch();
-    }
+  const onSubmit = (e: FormEvent): void => {
+    e.preventDefault();
+    goToSearch();
   };
 
   return (
-    <form className={cn(styles.search, className)} {...props} role="search">
+    <form
+      className={cn(styles.search, className)}
+      {...props}
+      role="search"
+      onSubmit={(e: FormEvent): void => onSubmit(e)}
+    >
       <Input
         className={styles.input}
         value={search}
         onChange={(e): void => setSearch(e.target.value)}
         placeholder="Поиск..."
-        onKeyDown={handleKeyDown}
       />
       <Button
         appearance="primary"
         className={styles.button}
-        onClick={goToSearch}
         aria-label={'Искать по сайту'}
       >
         <GlassIcon />

@@ -2,7 +2,7 @@ import { HhDataProps } from './HhData.props';
 import styles from './HhData.module.css';
 import { FC } from 'react';
 import { Card } from '../Card/Card';
-import RatingIcon from './Rating.svg';
+import RatingIcon from './rating.svg';
 import { priceRu } from '../../helpers/helpers';
 
 export const HhData: FC<HhDataProps> = ({

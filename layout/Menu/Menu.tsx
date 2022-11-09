@@ -92,37 +92,38 @@ export const Menu: FC = () => {
   const buildSecondLevel = (menuItem: FirstLevelMenuItem): JSX.Element => {
     return (
       <ul className={styles.secondBlock}>
-        {menu.map((m) => {
-          if (
-            m.pages.map((p) => p.alias).includes(router.asPath.split('/')[2])
-          ) {
-            m.isOpen = true;
-          }
+        {menu &&
+          menu.map((m) => {
+            if (
+              m.pages.map((p) => p.alias).includes(router.asPath.split('/')[2])
+            ) {
+              m.isOpen = true;
+            }
 
-          return (
-            <li key={m._id.secondCategory}>
-              <button
-                className={styles.secondLevel}
-                onClick={(): void => openSecondLevel(m._id.secondCategory)}
-                onKeyDown={(e: KeyboardEvent): void =>
-                  openSecondLevelKey(e, m._id.secondCategory)
-                }
-                aria-expanded={m.isOpen}
-              >
-                {m._id.secondCategory}
-              </button>
-              <motion.ul
-                layout
-                variants={variants}
-                className={styles.secondLevelBlock}
-                initial={m.isOpen ? 'visible' : 'hidden'}
-                animate={m.isOpen ? 'visible' : 'hidden'}
-              >
-                {buildThirdLevel(m.pages, menuItem.route, m.isOpen ?? false)}
-              </motion.ul>
-            </li>
-          );
-        })}
+            return (
+              <li key={m._id.secondCategory}>
+                <button
+                  className={styles.secondLevel}
+                  onClick={(): void => openSecondLevel(m._id.secondCategory)}
+                  onKeyDown={(e: KeyboardEvent): void =>
+                    openSecondLevelKey(e, m._id.secondCategory)
+                  }
+                  aria-expanded={m.isOpen}
+                >
+                  {m._id.secondCategory}
+                </button>
+                <motion.ul
+                  layout
+                  variants={variants}
+                  className={styles.secondLevelBlock}
+                  initial={m.isOpen ? 'visible' : 'hidden'}
+                  animate={m.isOpen ? 'visible' : 'hidden'}
+                >
+                  {buildThirdLevel(m.pages, menuItem.route, m.isOpen ?? false)}
+                </motion.ul>
+              </li>
+            );
+          })}
       </ul>
     );
   };
