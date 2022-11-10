@@ -5,11 +5,16 @@ import { FC } from 'react';
 import { Menu } from '../Menu/Menu';
 import Logo from '../logo.svg';
 import { Search } from '../../components';
+import Link from 'next/link';
 
 export const Sidebar: FC<SidebarProps> = ({ className, ...props }) => {
   return (
     <aside className={cn(className, styles.sidebar)} {...props}>
-      <Logo className={styles.logo} />
+      <Link href={`/`}>
+        <a className={styles.logoLink}>
+          <Logo />
+        </a>
+      </Link>
       <Search />
       <Menu />
     </aside>

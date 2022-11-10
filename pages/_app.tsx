@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Router from 'next/router';
 import ym, { YMInitializer } from 'react-yandex-metrika';
 import '../styles/globals.css';
+import { Loading } from '../components';
 
 Router.events?.on('routeChangeComplete', (url: string) => {
   if (typeof window !== 'undefined') {
@@ -28,6 +29,7 @@ function MyApp({ Component, pageProps, router }: AppProps): JSX.Element {
         version="2"
       />
       <Component {...pageProps} />
+      <Loading />
     </>
   );
 }

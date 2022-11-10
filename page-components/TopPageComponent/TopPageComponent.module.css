@@ -57,6 +57,12 @@
 	gap: 5px;
 }
 
+@media (max-width: 900px) and (min-width: 766px) {
+	.title {
+		grid-template-columns: 1fr;
+	}
+}
+
 @media (max-width: 640px) {
 	.title {
 		grid-template-columns: 1fr;

@@ -4,9 +4,10 @@ import cn from 'classnames';
 import { FC, useEffect, useState } from 'react';
 import Logo from '../logo.svg';
 import { ButtonIcon } from '../../components';
-import { motion, useReducedMotion } from 'framer-motion';
+import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import { Sidebar } from '../Sidebar/Sidebar';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 export const Header: FC<HeaderProps> = ({ className, ...props }) => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
@@ -17,6 +18,16 @@ export const Header: FC<HeaderProps> = ({ className, ...props }) => {
     setMenuOpen(false);
   }, [router]);
 
+  useEffect(() => {
+    if (menuOpen) {
+      document.body.style.overflow = 'hidden';
+      // document.body.style.paddingRight = '18px';
+    } else {
+      document.body.style.overflow = 'unset';
+      // document.body.style.paddingRight = 'unset';
+    }
+  }, [menuOpen]);
+
   const variants = {
     visible: {
       opacity: 1,
@@ -24,18 +35,24 @@ export const Header: FC<HeaderProps> = ({ className, ...props }) => {
     },
     hidden: {
       opacity: shouldReduceMotion ? 1 : 0,
-      x: '100%',
+      x: '-100%',
     },
   };
 
   return (
     <header className={cn(styles.header, className)} {...props}>
-      <Logo />
       <ButtonIcon
         appearance="white"
         icon="menu"
         onClick={(): void => setMenuOpen(true)}
       />
+
+      <Link href={`/`}>
+        <a className={styles.logoLink}>
+          <Logo />
+        </a>
+      </Link>
+
       <motion.div
         className={styles.mobileMenu}
         variants={variants}
@@ -51,6 +68,19 @@ export const Header: FC<HeaderProps> = ({ className, ...props }) => {
           onClick={(): void => setMenuOpen(false)}
         />
       </motion.div>
+
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            className={styles.overlay}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1 }}
+            onClick={(): void => setMenuOpen(false)}
+          />
+        )}
+      </AnimatePresence>
     </header>
   );
 };

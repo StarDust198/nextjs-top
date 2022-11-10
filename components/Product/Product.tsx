@@ -31,15 +31,13 @@ export const Product = motion(
         hidden: { height: 0, opacity: 0 },
       };
 
-      const scrollToReviews = (): void => {
-        setReviewsOpen(true);
-        setTimeout(() => {
-          reviewRef.current?.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start',
-          });
-          reviewRef.current?.focus();
-        }, 5);
+      const scrollToReviews = async (): Promise<void> => {
+        await setReviewsOpen(true);
+        reviewRef.current?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
+        reviewRef.current?.focus({ preventScroll: true });
       };
 
       return (

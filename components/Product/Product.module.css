@@ -213,7 +213,7 @@
 	}
 }
 
-@media (max-width: 900px) and (min-width: 765px) {
+@media (max-width: 900px) and (min-width: 766px) {
 	.product {
 		grid-template-areas:
 			"logo . title title title title title"

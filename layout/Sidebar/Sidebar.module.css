@@ -4,3 +4,9 @@
 
 	align-content: start;
 }
+
+.logoLink {
+	display: block;
+
+	margin: 16px auto;
+}

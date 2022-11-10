@@ -1,38 +1,16 @@
 import { LayoutProps } from './Layout.props';
 import styles from './Layout.module.css';
 import cn from 'classnames';
-import { FC, KeyboardEvent, useState, useRef, useEffect } from 'react';
+import { FC, KeyboardEvent, useState, useRef } from 'react';
 import { Header } from './Header/Header';
 import { Sidebar } from './Sidebar/Sidebar';
 import { Footer } from './Footer/Footer';
 import { AppContextProvider, IAppContext } from '../context/app.context';
 import { Up } from '../components';
-// import { Loading } from './Loading/Loading';
-import Router from 'next/router';
-import { AnimatePresence, motion } from 'framer-motion';
-import LoadingIcon from './loading.svg';
 
 const Layout: FC<LayoutProps> = ({ children }) => {
   const [showSkip, setShowSkip] = useState<boolean>(false);
-  const [loading, setLoading] = useState<boolean>(false);
   const bodyRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const setFalse = (): void => setLoading(false);
-    const setTrue = (): void => setLoading(true);
-
-    if (typeof window !== 'undefined') {
-      Router.events?.on('routeChangeStart', setTrue);
-      Router.events?.on('routeChangeComplete', setFalse);
-    }
-
-    return () => {
-      if (typeof window !== 'undefined') {
-        Router.events?.off('routeChangeStart', setTrue);
-        Router.events?.off('routeChangeComplete', setFalse);
-      }
-    };
-  }, []);
 
   const onSkip = (e: KeyboardEvent): void => {
     if (e.code == 'Space' || e.code === 'Enter') {
@@ -61,20 +39,6 @@ const Layout: FC<LayoutProps> = ({ children }) => {
       </main>
       <Footer className={styles.footer} />
       <Up />
-
-      <AnimatePresence>
-        {loading && (
-          <motion.div
-            className={styles.loading}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1 }}
-          >
-            <LoadingIcon />
-          </motion.div>
-        )}
-      </AnimatePresence>
     </div>
   );
 };
