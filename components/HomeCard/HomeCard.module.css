@@ -1,0 +1,33 @@
+.card {
+	padding: 15px;
+}
+
+.title {
+	margin-block: 20px;
+	/* text-transform: uppercase; */
+}
+
+.link {
+	display: block;
+	cursor: pointer;
+	overflow: hidden;
+	/* margin-top: 10px; */
+}
+
+/* .link */
+
+.link:hover {
+	color: var(--primary);
+	/* cursor: pointer; */
+}
+
+.button {
+	background: none;
+	border: none;
+	padding: 0;
+	cursor: pointer;
+}
+
+.button:hover {
+	color: var(--primary);
+}

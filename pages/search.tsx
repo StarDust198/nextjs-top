@@ -3,9 +3,24 @@ import { withLayout } from '../layout/Layout';
 import axios from 'axios';
 import { MenuItem } from '../interfaces/menu.interface';
 import { API } from '../helpers/api';
+import { useRouter } from 'next/router';
 
-function Search(): JSX.Element {
-  return <>Search</>;
+function Search({ menu }: { menu: MenuItem[] }): JSX.Element {
+  const router = useRouter();
+
+  const query = router.query.q;
+
+  if (typeof query === 'string') {
+    console.log(
+      menu
+        .flatMap((item) => item.pages)
+        .filter((item) =>
+          item.title.toLowerCase().includes(query.toLowerCase())
+        )
+    );
+  }
+
+  return <>Search: {router.query.q}</>;
 }
 
 export default withLayout(Search);

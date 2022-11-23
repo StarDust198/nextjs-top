@@ -30,17 +30,7 @@ export interface ProductModel {
   createdAt: Date;
   updatedAt: Date;
   __v: number;
-  // html: string;
-  // blog: Blog;
-  // companyId: string;
-  // clicks: number;
   reviews: ReviewModel[];
   reviewCount: number;
   reviewAvg?: number;
 }
-
-// export interface Blog {
-//   text: string;
-//   _id: string;
-//   bigImage: string;
-// }
