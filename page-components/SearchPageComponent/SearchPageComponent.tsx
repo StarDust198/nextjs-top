@@ -1,5 +1,5 @@
-import { TopPageComponentProps } from './TopPageComponent.props';
-import styles from './TopPageComponent.module.css';
+import { SearchPageComponentProps } from './SearchPageComponent.props';
+import styles from './SearchPageComponent.module.css';
 import cn from 'classnames';
 import React, { FC, Fragment, useEffect, useReducer } from 'react';
 import { Advantage, HhData, Htag, Product, Sort, Tag } from '../../components';
@@ -8,8 +8,7 @@ import { SortEnum } from '../../components/Sort/Sort.props';
 import { sortReducer } from '../../helpers/sort.reducer';
 import { useReducedMotion } from 'framer-motion';
 
-export const TopPageComponent: FC<TopPageComponentProps> = ({
-  page,
+export const SearchPageComponent: FC<SearchPageComponentProps> = ({
   firstCategory,
   products,
 }) => {
@@ -32,7 +31,7 @@ export const TopPageComponent: FC<TopPageComponentProps> = ({
       <div className={styles.title}>
         <div>
           <Htag className={styles.titleText} tag="h1">
-            {page.title}
+            Результаты поиска
           </Htag>
           &nbsp;&nbsp;
           {products && (
@@ -49,12 +48,12 @@ export const TopPageComponent: FC<TopPageComponentProps> = ({
         <Sort
           sort={sort}
           setSort={onSort}
-          direction={direction}
           changeDirection={(): void => dispatch({ type: 'changeDirection' })}
+          direction={direction}
         />
       </div>
       <div role="list">
-        {sortedProducts &&
+        {sortedProducts && sortedProducts.length > 0 ? (
           sortedProducts.map((p) => (
             <Product
               layout
@@ -63,44 +62,10 @@ export const TopPageComponent: FC<TopPageComponentProps> = ({
               key={p._id}
               product={p}
             />
-          ))}
-      </div>
-      <div className={cn(styles.title, styles.hhTitle)}>
-        <Htag tag="h2">Вакансии - {page.category}</Htag>
-        <Tag color="red" size="m">
-          hh.ru
-        </Tag>
-      </div>
-
-      {firstCategory === TopLevelCategory.Courses && page.hh && (
-        <HhData {...page.hh} />
-      )}
-
-      {page.advantages && page.advantages.length > 0 && (
-        <div className={styles.advantages}>
-          <Htag tag="h2">Преимущества</Htag>
-          {page.advantages.map((adv) => (
-            <Fragment key={adv._id}>
-              {adv.title && <Advantage {...adv} />}
-            </Fragment>
-          ))}
-        </div>
-      )}
-
-      {page.seoText && (
-        <div
-          className={styles.seo}
-          dangerouslySetInnerHTML={{ __html: page.seoText }}
-        />
-      )}
-
-      <Htag tag="h2">Получаемые навыки</Htag>
-      <div className={styles.tags}>
-        {page.tags.map((tag) => (
-          <Tag color="primary" key={tag}>
-            {tag}
-          </Tag>
-        ))}
+          ))
+        ) : (
+          <Htag tag={'h2'}>Подходящих курсов не найдено</Htag>
+        )}
       </div>
     </div>
   );

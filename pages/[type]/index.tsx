@@ -8,6 +8,9 @@ import { API } from '../../helpers/api';
 import { TopLevelCategory } from '../../interfaces/page.interface';
 import { useContext, useEffect } from 'react';
 import { AppContext } from '../../context/app.context';
+import { Card, P } from '../../components';
+import Link from 'next/link';
+import { BasePageComponent } from '../../page-components';
 
 function Type({ firstCategory, menu }: TypeProps): JSX.Element {
   const { setMenu } = useContext(AppContext);
@@ -16,7 +19,11 @@ function Type({ firstCategory, menu }: TypeProps): JSX.Element {
     setMenu && setMenu(menu);
   }, [setMenu, menu]);
 
-  return <>Type: {firstCategory}</>;
+  return (
+    <>
+      <BasePageComponent firstCategory={firstCategory} menu={menu} />
+    </>
+  );
 }
 
 export default withLayout(Type);

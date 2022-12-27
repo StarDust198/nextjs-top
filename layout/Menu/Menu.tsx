@@ -70,7 +70,7 @@ export const Menu: FC = () => {
       <ul>
         {firstLevelMenu.map((m) => (
           <li key={m.route} aria-expanded={m.id === firstCategory}>
-            <Link href={`/${m.route}`}>
+            {/* <Link href={`/${m.route}`}>
               <a>
                 <div
                   className={cn(styles.firstLevel, {
@@ -81,7 +81,22 @@ export const Menu: FC = () => {
                   <span>{m.name}</span>
                 </div>
               </a>
-            </Link>
+            </Link> */}
+            {m.id === firstCategory ? (
+              <div className={cn(styles.firstLevel, styles.firstLevelActive)}>
+                {m.icon}
+                <span>{m.name}</span>
+              </div>
+            ) : (
+              <Link href={`/${m.route}`}>
+                <a>
+                  <div className={cn(styles.firstLevel)}>
+                    {m.icon}
+                    <span>{m.name}</span>
+                  </div>
+                </a>
+              </Link>
+            )}
             {m.id === firstCategory && buildSecondLevel(m)}
           </li>
         ))}

@@ -1,0 +1,16 @@
+.wrapper {
+	padding: 20px;
+}
+
+.description {
+	margin-top: 15px;
+}
+
+.homeLink {
+	display: block;
+	margin-top: 15px;
+}
+
+.homeLink:hover {
+	color: var(--primary);
+}

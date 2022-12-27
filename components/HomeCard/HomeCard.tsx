@@ -16,13 +16,40 @@ export const HomeCard: FC<HomeCardProps> = ({
   const [showAll, setShowAll] = useState<boolean>(false);
   const shouldReduceMotion = useReducedMotion();
 
+  // const variants = {
+  //   visible: {
+  //     height: 'auto',
+  //     opacity: 1,
+  //     marginTop: 10,
+  //   },
+  //   hidden: { height: 0, opacity: 0, marginTop: 0 },
+  // };
   const variants = {
     visible: {
-      height: 'auto',
-      opacity: 1,
-      marginTop: 10,
+      transition: shouldReduceMotion
+        ? {}
+        : {
+            when: 'beforeChildren',
+            staggerChildren: 0.1,
+          },
     },
-    hidden: { height: 0, opacity: 0, marginTop: 0 },
+    hidden: {},
+  };
+
+  const variantsChildren = {
+    visible: {
+      opacity: 1,
+      height: 'auto',
+      marginTop: 10,
+      // transition: shouldReduceMotion
+      //   ? {}
+      //   : { duration: 1, when: 'beforeChildren', staggerChildren: 0.5 },
+    },
+    hidden: {
+      marginTop: 0,
+      opacity: shouldReduceMotion ? 1 : 0,
+      height: 0,
+    },
   };
 
   return (
@@ -30,21 +57,28 @@ export const HomeCard: FC<HomeCardProps> = ({
       <Htag className={styles.title} tag="h3">
         {cardInfo._id.secondCategory}
       </Htag>
-      {cardInfo.pages?.map((item, i) => (
-        <Fragment key={item._id}>
-          <Link href={`/courses/${item.alias}`}>
-            <motion.a
-              initial="hidden"
-              animate={showAll || i < 3 ? 'visible' : 'hidden'}
-              variants={variants}
-              transition={{ duration: !shouldReduceMotion ? 0.01 : 1 }}
-              className={styles.link}
-            >
-              {item.category}
-            </motion.a>
-          </Link>
-        </Fragment>
-      ))}
+      <motion.ul
+        variants={variants}
+        layout
+        initial={showAll ? 'visible' : 'hidden'}
+        animate={showAll ? 'visible' : 'hidden'}
+      >
+        {cardInfo.pages?.map((item, i) => (
+          <motion.li
+            key={item._id}
+            variants={variantsChildren}
+            initial={i < 3 ? 'visible' : false}
+            animate={i < 3 ? 'visible' : false}
+            className={cn(styles.link, {
+              [styles.noHeight]: i > 2 || !showAll,
+            })}
+          >
+            <Link href={`/courses/${item.alias}`}>
+              <a>{item.category}</a>
+            </Link>
+          </motion.li>
+        ))}
+      </motion.ul>
       <Divider />
       {cardInfo.pages.length > 3 && (
         <button
@@ -53,7 +87,7 @@ export const HomeCard: FC<HomeCardProps> = ({
           aria-label="Показать все"
           onClick={(): void => setShowAll((show: boolean) => !show)}
         >
-          {showAll ? 'Скрыть курсы' : 'Смотреть все курсы'}
+          {showAll ? 'Скрыть' : 'Показать все'}
         </button>
       )}
     </Card>

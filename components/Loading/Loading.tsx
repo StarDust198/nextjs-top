@@ -1,8 +1,7 @@
-import styles from './Loading.module.css';
 import { FC, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { AnimatePresence, motion } from 'framer-motion';
 import LoadingIcon from './loading.svg';
+import { Modal } from '../Modal/Modal';
 
 export const Loading: FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
@@ -16,18 +15,8 @@ export const Loading: FC = () => {
   }, []);
 
   return (
-    <AnimatePresence>
-      {loading && (
-        <motion.div
-          className={styles.loading}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1 }}
-        >
-          <LoadingIcon />
-        </motion.div>
-      )}
-    </AnimatePresence>
+    <Modal isOpen={loading}>
+      <LoadingIcon />
+    </Modal>
   );
 };

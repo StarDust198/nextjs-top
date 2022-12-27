@@ -32,5 +32,6 @@ export interface ProductModel {
   __v: number;
   reviews: ReviewModel[];
   reviewCount: number;
+  html: string;
   reviewAvg?: number;
 }

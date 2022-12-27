@@ -13,6 +13,8 @@ import Image from 'next/image';
 import { Review } from '../Review/Review';
 import { ReviewForm } from '../ReviewForm/ReviewForm';
 import { motion } from 'framer-motion';
+import { ProductDetails } from '../ProductDetails/ProductDetails';
+import { Modal } from '../Modal/Modal';
 
 export const Product = motion(
   forwardRef(
@@ -21,7 +23,9 @@ export const Product = motion(
       ref: ForwardedRef<HTMLDivElement>
     ): JSX.Element => {
       const [reviewsOpen, setReviewsOpen] = useState<boolean>(false);
+      const [detailsOpen, setDetailsOpen] = useState<boolean>(false);
       const reviewRef = useRef<HTMLDivElement>(null);
+      console.log(product.image);
 
       const variants = {
         visible: {
@@ -45,7 +49,11 @@ export const Product = motion(
           <Card className={cn(styles.product, className)}>
             <div className={styles.logo}>
               <Image
-                src={process.env.NEXT_PUBLIC_DOMAIN + product.image}
+                src={
+                  product.image.startsWith('http')
+                    ? product.image
+                    : process.env.NEXT_PUBLIC_DOMAIN + product.image
+                }
                 alt={product.title}
                 width={70}
                 height={70}
@@ -128,7 +136,15 @@ export const Product = motion(
             <Divider className={styles.hr2} />
 
             <div className={styles.actions}>
-              <Button appearance="primary">Узнать подробнее</Button>
+              <Button
+                appearance="primary"
+                aria-expanded={detailsOpen}
+                onClick={(): void =>
+                  setDetailsOpen((detOpen: boolean) => !detOpen)
+                }
+              >
+                Узнать подробнее
+              </Button>
               <Button
                 appearance="ghost"
                 arrow={reviewsOpen ? 'down' : 'right'}
@@ -163,6 +179,15 @@ export const Product = motion(
               <ReviewForm productId={product._id} isOpen={reviewsOpen} />
             </Card>
           </motion.div>
+          <Modal
+            isOpen={detailsOpen}
+            onClick={(): void => setDetailsOpen(false)}
+          >
+            <ProductDetails
+              contents={product.html}
+              closeModal={(): void => setDetailsOpen(false)}
+            />
+          </Modal>
         </div>
       );
     }
