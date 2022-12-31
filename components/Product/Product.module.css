@@ -99,6 +99,11 @@
 
 .actions {
 	grid-area: actions;
+
+	display: flex;
+	gap: 10px 20px;
+
+	flex-wrap: wrap;
 }
 
 .feature {
@@ -168,14 +173,6 @@
 
 	border-left: 2px solid var(--red);
 }
-
-
-.actions {
-	display: flex;
-	gap: 10px 20px;
-	flex-wrap: wrap;
-}
-    
 
 .reviews {
 	padding: 30px;

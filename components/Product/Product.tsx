@@ -25,7 +25,8 @@ export const Product = motion(
       const [reviewsOpen, setReviewsOpen] = useState<boolean>(false);
       const [detailsOpen, setDetailsOpen] = useState<boolean>(false);
       const reviewRef = useRef<HTMLDivElement>(null);
-      console.log(product.image);
+      const modalRef = useRef<HTMLDivElement>(null);
+      const modalButtonRef = useRef<HTMLButtonElement>(null);
 
       const variants = {
         visible: {
@@ -42,6 +43,16 @@ export const Product = motion(
           block: 'start',
         });
         reviewRef.current?.focus({ preventScroll: true });
+      };
+
+      const openDetails = async (): Promise<void> => {
+        await setDetailsOpen(true);
+        modalRef.current?.focus();
+      };
+
+      const closeDetails = (): void => {
+        setDetailsOpen(false);
+        modalButtonRef.current?.focus();
       };
 
       return (
@@ -139,9 +150,8 @@ export const Product = motion(
               <Button
                 appearance="primary"
                 aria-expanded={detailsOpen}
-                onClick={(): void =>
-                  setDetailsOpen((detOpen: boolean) => !detOpen)
-                }
+                onClick={openDetails}
+                ref={modalButtonRef}
               >
                 Узнать подробнее
               </Button>
@@ -184,8 +194,9 @@ export const Product = motion(
             onClick={(): void => setDetailsOpen(false)}
           >
             <ProductDetails
+              ref={modalRef}
               contents={product.html}
-              closeModal={(): void => setDetailsOpen(false)}
+              closeModal={closeDetails}
             />
           </Modal>
         </div>

@@ -112,7 +112,7 @@ export const ReviewForm: FC<ReviewFormProps> = ({
             Отправить
           </Button>
           <span className={styles.info}>
-            *Перед публикацией отзыв пройдет предварительную модерацию и
+            * Перед публикацией отзыв пройдет предварительную модерацию и
             проверку
           </span>
         </div>

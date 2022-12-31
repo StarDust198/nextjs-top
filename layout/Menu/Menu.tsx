@@ -70,18 +70,6 @@ export const Menu: FC = () => {
       <ul>
         {firstLevelMenu.map((m) => (
           <li key={m.route} aria-expanded={m.id === firstCategory}>
-            {/* <Link href={`/${m.route}`}>
-              <a>
-                <div
-                  className={cn(styles.firstLevel, {
-                    [styles.firstLevelActive]: m.id === firstCategory,
-                  })}
-                >
-                  {m.icon}
-                  <span>{m.name}</span>
-                </div>
-              </a>
-            </Link> */}
             {m.id === firstCategory ? (
               <div className={cn(styles.firstLevel, styles.firstLevelActive)}>
                 {m.icon}

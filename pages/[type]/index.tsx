@@ -8,9 +8,8 @@ import { API } from '../../helpers/api';
 import { TopLevelCategory } from '../../interfaces/page.interface';
 import { useContext, useEffect } from 'react';
 import { AppContext } from '../../context/app.context';
-import { Card, P } from '../../components';
-import Link from 'next/link';
 import { BasePageComponent } from '../../page-components';
+import Head from 'next/head';
 
 function Type({ firstCategory, menu }: TypeProps): JSX.Element {
   const { setMenu } = useContext(AppContext);
@@ -21,6 +20,22 @@ function Type({ firstCategory, menu }: TypeProps): JSX.Element {
 
   return (
     <>
+      <Head>
+        <title>{`${firstLevelMenu[firstCategory]?.name} - страница в разработке`}</title>
+        <meta
+          name="description"
+          content={`${firstLevelMenu[firstCategory]?.name} - в будущем здесь появится страница с описанием`}
+        />
+        <meta
+          property="og:title"
+          content={`${firstLevelMenu[firstCategory]?.name} - страница в разработке`}
+        />
+        <meta
+          property="og:description"
+          content={`${firstLevelMenu[firstCategory]?.name} - в будущем здесь появится страница с описанием`}
+        />
+        <meta property="og:type" content="article" />
+      </Head>
       <BasePageComponent firstCategory={firstCategory} menu={menu} />
     </>
   );

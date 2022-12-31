@@ -2,27 +2,12 @@ import { HomePageComponentProps } from './HomePageComponent.props';
 import styles from './HomePageComponent.module.css';
 import cn from 'classnames';
 import Image from 'next/image';
-import React, { FC, Fragment, useEffect, useReducer } from 'react';
-import {
-  Advantage,
-  Card,
-  HhData,
-  HomeCard,
-  Htag,
-  P,
-  Product,
-  Sort,
-  Tag,
-} from '../../components';
-import { TopLevelCategory } from '../../interfaces/page.interface';
+import React, { FC } from 'react';
+import { Card, HomeCard, Htag, P } from '../../components';
 import StarIcon from './star.svg';
 import { schools } from '../../helpers/helpers';
 
-export const HomePageComponent: FC<HomePageComponentProps> = ({
-  // page,
-  // products,
-  menu,
-}) => {
+export const HomePageComponent: FC<HomePageComponentProps> = ({ menu }) => {
   return (
     <div className={styles.wrapper}>
       <Htag className={styles.title} tag="h1">
@@ -54,7 +39,11 @@ export const HomePageComponent: FC<HomePageComponentProps> = ({
         </Htag>
         <div className={styles.schoolContainer}>
           {schools.map((school) => (
-            <a href={school.link} className={cn(styles.schoolLink)}>
+            <a
+              key={school.name}
+              href={school.link}
+              className={cn(styles.schoolLink)}
+            >
               <Image
                 src={
                   school.img.startsWith('http')

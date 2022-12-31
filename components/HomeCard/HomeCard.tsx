@@ -1,29 +1,17 @@
 import { HomeCardProps } from './HomeCard.props';
 import styles from './HomeCard.module.css';
 import cn from 'classnames';
-import { FC, Fragment, useState } from 'react';
+import { FC, useState } from 'react';
 import { Card } from '../Card/Card';
 import { Htag } from '../Htag/Htag';
 import { Divider } from '../Divider/Divider';
 import Link from 'next/link';
 import { motion, useReducedMotion } from 'framer-motion';
 
-export const HomeCard: FC<HomeCardProps> = ({
-  cardInfo,
-  className,
-  ...props
-}) => {
+export const HomeCard: FC<HomeCardProps> = ({ cardInfo, className }) => {
   const [showAll, setShowAll] = useState<boolean>(false);
   const shouldReduceMotion = useReducedMotion();
 
-  // const variants = {
-  //   visible: {
-  //     height: 'auto',
-  //     opacity: 1,
-  //     marginTop: 10,
-  //   },
-  //   hidden: { height: 0, opacity: 0, marginTop: 0 },
-  // };
   const variants = {
     visible: {
       transition: shouldReduceMotion
@@ -41,9 +29,6 @@ export const HomeCard: FC<HomeCardProps> = ({
       opacity: 1,
       height: 'auto',
       marginTop: 10,
-      // transition: shouldReduceMotion
-      //   ? {}
-      //   : { duration: 1, when: 'beforeChildren', staggerChildren: 0.5 },
     },
     hidden: {
       marginTop: 0,
@@ -74,7 +59,7 @@ export const HomeCard: FC<HomeCardProps> = ({
             })}
           >
             <Link href={`/courses/${item.alias}`}>
-              <a>{item.category}</a>
+              <a tabIndex={i < 3 || showAll ? 0 : -1}>{item.category}</a>
             </Link>
           </motion.li>
         ))}
@@ -84,7 +69,9 @@ export const HomeCard: FC<HomeCardProps> = ({
         <button
           className={styles.button}
           aria-expanded={showAll}
-          aria-label="Показать все"
+          aria-label={
+            showAll ? 'Скрыть направления' : 'Показать все направления'
+          }
           onClick={(): void => setShowAll((show: boolean) => !show)}
         >
           {showAll ? 'Скрыть' : 'Показать все'}

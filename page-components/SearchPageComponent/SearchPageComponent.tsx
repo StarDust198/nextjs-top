@@ -1,15 +1,12 @@
 import { SearchPageComponentProps } from './SearchPageComponent.props';
 import styles from './SearchPageComponent.module.css';
-import cn from 'classnames';
-import React, { FC, Fragment, useEffect, useReducer } from 'react';
-import { Advantage, HhData, Htag, Product, Sort, Tag } from '../../components';
-import { TopLevelCategory } from '../../interfaces/page.interface';
+import React, { FC, useEffect, useReducer } from 'react';
+import { Htag, Product, Sort, Tag } from '../../components';
 import { SortEnum } from '../../components/Sort/Sort.props';
 import { sortReducer } from '../../helpers/sort.reducer';
 import { useReducedMotion } from 'framer-motion';
 
 export const SearchPageComponent: FC<SearchPageComponentProps> = ({
-  firstCategory,
   products,
 }) => {
   const [{ products: sortedProducts, sort, direction }, dispatch] = useReducer(

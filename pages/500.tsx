@@ -1,10 +1,18 @@
-import { Htag } from '../components';
+import Head from 'next/head';
 import { withLayout } from '../layout/Layout';
+import { ErrorPageComponent } from '../page-components';
 
 export function Error500(): JSX.Element {
   return (
     <>
-      <Htag tag="h1">Ошибка на сервере</Htag>
+      <Head>
+        <title>{`Что-то пошло не так`}</title>
+        <meta name="description" content={`Ошибка на сервере`} />
+        <meta property="og:title" content={`Что-то пошло не так`} />
+        <meta property="og:description" content={`Ошибка на сервере`} />
+        <meta property="og:type" content="article" />
+      </Head>
+      <ErrorPageComponent message="Ошибка на сервере" />
     </>
   );
 }

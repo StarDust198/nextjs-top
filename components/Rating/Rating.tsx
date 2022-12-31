@@ -4,8 +4,10 @@ import cn from 'classnames';
 import {
   ForwardedRef,
   forwardRef,
+  Fragment,
   KeyboardEvent,
   useEffect,
+  useRef,
   useState,
 } from 'react';
 import StarIcon from './star.svg';
@@ -16,8 +18,8 @@ export const Rating = forwardRef(
       rating,
       isEditable = false,
       setRating,
-      className,
       error,
+      tabIndex,
       ...props
     }: RatingProps,
     ref: ForwardedRef<HTMLDivElement>
@@ -25,90 +27,97 @@ export const Rating = forwardRef(
     const [ratingArr, setRatingArr] = useState<JSX.Element[]>(
       new Array(5).fill(<></>)
     );
+    const ratingArrayRef = useRef<(HTMLSpanElement | null)[]>([]);
 
     useEffect(() => {
       constructRating(rating);
-    }, [rating]);
+    }, [rating, tabIndex]);
+
+    const computeFocus = (r: number, i: number): number => {
+      if (!isEditable) {
+        return -1;
+      }
+      if (!rating && i == 0) {
+        return tabIndex ?? 0;
+      }
+      if (r == i + 1) {
+        return tabIndex ?? 0;
+      }
+      return -1;
+    };
 
     const constructRating = (currentRating: number): void => {
-      const updatedArr = ratingArr.map((r: JSX.Element, i: number) => {
+      const updatedArray = ratingArr.map((r: JSX.Element, i: number) => {
         return (
           <span
             className={cn(styles.star, {
               [styles.filled]: i < currentRating,
               [styles.editable]: isEditable,
             })}
-            onMouseEnter={(): void => changeDisplay(i + 1)}
-            onMouseLeave={(): void => changeDisplay(rating)}
-            onClick={(): void => onClickStar(i + 1)}
+            onMouseEnter={(): void => changeDispay(i + 1)}
+            onMouseLeave={(): void => changeDispay(rating)}
+            onClick={(): void => onClick(i + 1)}
+            tabIndex={computeFocus(rating, i)}
+            onKeyDown={handleKey}
+            ref={(r): number => ratingArrayRef.current?.push(r)}
+            role={isEditable ? 'slider' : ''}
+            aria-invalid={error ? true : false}
+            aria-valuenow={rating}
+            aria-valuemax={5}
+            aria-label={isEditable ? 'Укажите рейтинг' : 'рейтинг' + rating}
+            aria-valuemin={1}
           >
             <StarIcon />
           </span>
         );
       });
-      setRatingArr(updatedArr);
+      setRatingArr(updatedArray);
     };
 
-    const changeDisplay = (i: number): void => {
-      if (!isEditable) return;
+    const changeDispay = (i: number): void => {
+      if (!isEditable) {
+        return;
+      }
       constructRating(i);
     };
 
-    const onClickStar = (i: number): void => {
-      if (!isEditable || !setRating) return;
+    const onClick = (i: number): void => {
+      if (!isEditable || !setRating) {
+        return;
+      }
       setRating(i);
     };
 
-    const onKeyPress = (e: KeyboardEvent): void => {
-      if (
-        !(
-          e.code === 'ArrowRight' ||
-          e.code === 'ArrowLeft' ||
-          e.code === 'ArrowUp' ||
-          e.code === 'ArrowDown'
-        ) ||
-        !setRating ||
-        !isEditable
-      )
+    const handleKey = (e: KeyboardEvent): void => {
+      if (!isEditable || !setRating) {
         return;
-
-      e.preventDefault();
-
-      switch (e.code) {
-        case 'ArrowRight':
-        case 'ArrowUp':
-          if (rating < 5) setRating(rating + 1);
-          if (!rating) setRating(1);
-          break;
-        case 'ArrowLeft':
-        case 'ArrowDown':
-          if (rating > 1) setRating(rating - 1);
-          break;
+      }
+      if (e.code == 'ArrowRight' || e.code == 'ArrowUp') {
+        if (!rating) {
+          setRating(1);
+        } else {
+          e.preventDefault();
+          setRating(rating < 5 ? rating + 1 : 5);
+        }
+        ratingArrayRef.current[rating]?.focus();
+      }
+      if (e.code == 'ArrowLeft' || e.code == 'ArrowDown') {
+        e.preventDefault();
+        setRating(rating > 1 ? rating - 1 : 1);
+        ratingArrayRef.current[rating - 2]?.focus();
       }
     };
 
     return (
       <div
-        className={cn(
-          styles.ratingWrapper,
-          {
-            [styles.error]: error,
-          },
-          className
-        )}
-        tabIndex={isEditable ? 0 : -1}
         {...props}
-        onKeyDown={onKeyPress}
         ref={ref}
-        role={isEditable ? 'slider' : ''}
-        aria-valuenow={rating}
-        aria-valuemin={1}
-        aria-valuemax={5}
-        aria-label={isEditable ? 'укажите рейтинг' : 'рейтинг ' + rating}
-        aria-invalid={!!error}
+        className={cn(styles.ratingWrapper, {
+          [styles.error]: error,
+        })}
       >
         {ratingArr.map((r, i) => (
-          <span key={i}>{r}</span>
+          <Fragment key={i}>{r}</Fragment>
         ))}
         {error && (
           <span role="alert" className={styles.errorMessage}>

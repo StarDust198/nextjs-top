@@ -1,36 +1,29 @@
-import {
-  GetServerSideProps,
-  GetStaticProps,
-  GetServerSidePropsContext,
-} from 'next';
+import { GetServerSideProps, GetServerSidePropsContext } from 'next';
 import { withLayout } from '../layout/Layout';
 import axios from 'axios';
 import { MenuItem } from '../interfaces/menu.interface';
 import { API } from '../helpers/api';
-import { useRouter } from 'next/router';
-import { firstLevelMenu } from '../helpers/helpers';
 import { ParsedUrlQuery } from 'querystring';
-import { TopPageModel } from '../interfaces/page.interface';
 import { ProductModel } from '../interfaces/product.interface';
 import Head from 'next/head';
 import { SearchPageComponent } from '../page-components';
 
-function Search({ menu, products, firstCategory }: SearchProps): JSX.Element {
+function Search({ products, firstCategory }: SearchProps): JSX.Element {
   return (
     <>
       <Head>
         <title>Поиск лучших курсов онлайн | Обучение с нуля (2022)</title>
         <meta
           name="description"
-          content="Поиск и сравнение лучших курсов по любым направлениям онлайн в 2022 г"
+          content={`Поиск и сравнение лучших курсов по любым направлениям онлайн в ${new Date().getFullYear()}г`}
         />
         <meta
           property="og:title"
-          content="Поиск лучших курсов онлайн | Обучение с нуля (2022)"
+          content={`Поиск лучших курсов онлайн | Обучение с нуля (${new Date().getFullYear()})`}
         />
         <meta
           property="og:description"
-          content="Поиск и сравнение лучших курсов по любым направлениям онлайн в 2022 г"
+          content={`Поиск и сравнение лучших курсов по любым направлениям онлайн в ${new Date().getFullYear()}г`}
         />
         <meta property="og:type" content="article" />
       </Head>

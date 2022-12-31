@@ -15,10 +15,17 @@ export const Sort: FC<SortProps> = ({
   return (
     <div className={cn(styles.sort, className)} {...props}>
       <div id="sort" className="dNone">
-        Сортировка
+        Сортировкa
+        {direction === 'down' ? 'По нарастанию' : 'По убыванию'}
       </div>
+      <div id="price" className="dNone">
+        По цене
+      </div>
+      <div id="rating" className="dNone">
+        По рейтингу
+      </div>
+
       <button
-        id="rating"
         onClick={(): void => {
           if (sort === SortEnum.price) setSort(SortEnum.rating);
           else changeDirection();
@@ -27,7 +34,7 @@ export const Sort: FC<SortProps> = ({
           [styles.active]: sort === SortEnum.rating,
         })}
         aria-selected={sort === SortEnum.rating}
-        aria-labelledby="sort rating"
+        aria-labelledby="sort rating direction"
       >
         <SortIcon
           className={cn(styles.sortIcon, {
@@ -37,7 +44,6 @@ export const Sort: FC<SortProps> = ({
         По&nbsp;рейтингу
       </button>
       <button
-        id="price"
         onClick={(): void => {
           if (sort === SortEnum.rating) setSort(SortEnum.price);
           else changeDirection();
@@ -46,7 +52,7 @@ export const Sort: FC<SortProps> = ({
           [styles.active]: sort === SortEnum.price,
         })}
         aria-selected={sort === SortEnum.price}
-        aria-labelledby="sort price"
+        aria-labelledby="sort price direction"
       >
         <SortIcon
           className={cn(styles.sortIcon, {

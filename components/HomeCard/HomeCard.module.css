@@ -4,25 +4,17 @@
 
 .title {
 	margin-block: 20px;
-
-	/* text-transform: uppercase; */
 }
 
 .link {
 	display: block;
-	overflow: hidden;
+	/* overflow: hidden; */
 
 	cursor: pointer;
-
-	/* margin-top: 10px; */
 }
-
-/* .link */
 
 .link:hover {
 	color: var(--primary);
-
-	/* cursor: pointer; */
 }
 
 .noHeight {

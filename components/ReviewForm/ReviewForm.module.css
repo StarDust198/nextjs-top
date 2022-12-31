@@ -23,10 +23,11 @@
 }
 
 .info {
+	max-width: 380px;
+	margin-left: 15px;
+
 	font-size: 12px;
 	line-height: 1.1;
-	margin-left: 15px;
-	max-width: 380px;
 }
 
 .rating {
