@@ -54,12 +54,14 @@ export const HomeCard: FC<HomeCardProps> = ({ cardInfo, className }) => {
             variants={variantsChildren}
             initial={i < 3 ? 'visible' : false}
             animate={i < 3 ? 'visible' : false}
-            className={cn(styles.link, {
+            className={cn(styles.linkListItem, {
               [styles.noHeight]: i > 2 || !showAll,
             })}
           >
             <Link href={`/courses/${item.alias}`}>
-              <a tabIndex={i < 3 || showAll ? 0 : -1}>{item.category}</a>
+              <a className={styles.link} tabIndex={i < 3 || showAll ? 0 : -1}>
+                {item.category}
+              </a>
             </Link>
           </motion.li>
         ))}

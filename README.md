@@ -25,7 +25,7 @@ My first app on NextJS - the course aggregator.
 
 ### Links
 
-- Live Site URL: [Live site URL will be added soon](https://your-live-site-url.com)
+- Live Site URL: [Best Courses](https://best-courses.vercel.app/)
 
 ## My process
 

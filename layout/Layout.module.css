@@ -1,6 +1,5 @@
 .wrapper {
 	display: grid;
-
 	min-height: 100vh;
 	gap: 40px 30px;
 	grid-template-columns: auto 230px minmax(320px, 1200px) auto;
@@ -32,11 +31,8 @@
 	position: fixed;
 	top: 0;
 	left: 30px;
-
 	overflow: hidden;
-
 	height: 0;
-
 	color: var(white);
 	background-color: var(--primary);
 }
@@ -48,14 +44,11 @@
 .loading {
 	position: fixed;
 	z-index: 15;
-
 	display: flex;
 	align-items: center;
 	justify-content: center;
-
 	width: 100vw;
 	height: 100vh;
-
 	background-color: rgb(50 50 50 / 50%);
 }
 

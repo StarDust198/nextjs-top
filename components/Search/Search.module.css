@@ -1,6 +1,5 @@
 .search {
 	position: relative;
-
 	width: 100%;
 }
 
@@ -12,8 +11,6 @@
 	position: absolute;
 	top: 50%;
 	right: 3px;
-
 	padding: 7px;
-
 	transform: translateY(-50%);
 }

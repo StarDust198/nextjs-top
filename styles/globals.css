@@ -2,10 +2,8 @@ html,
 body {
 	margin: 0;
 	padding: 0;
-
 	color: var(--black);
 	background: #F9F8FF;
-
 	font-family:
 		"Noto Sans",
 		sans-serif;
@@ -13,14 +11,12 @@ body {
 
 a {
 	text-decoration: none;
-
 	color: inherit;
 }
 
 ul {
 	margin: 0;
 	padding: 0;
-
 	list-style: none;
 }
 
@@ -56,9 +52,7 @@ ul {
 
 .vHidden {
 	position: absolute;
-
 	overflow: hidden;
-
 	width: 0;
 	height: 0;
 }

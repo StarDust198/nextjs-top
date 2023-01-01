@@ -1,18 +1,14 @@
 .textarea {
 	display: block;
-
 	width: 100%;
 	padding: 7px 12px;
-
 	resize: none;
-
 	color: var(--black);
 	border: none;
 	border-radius: 5px;
 	outline-color: var(--primary);
 	background: var(--white);
 	box-shadow: 0 4px 4px rgb(0 0 0 / 5%);
-
 	font-family: var(--font-family);
 	font-size: 16px;
 	font-weight: 400;
@@ -35,6 +31,5 @@
 	position: absolute;
 	bottom: -20px;
 	left: 0;
-
 	color: var(--red);
 }

@@ -1,9 +1,7 @@
 .firstLevel {
 	display: grid;
 	align-items: center;
-
 	margin-top: 20px;
-
 	font-size: 18px;
 	line-height: 25px;
 	gap: 20px;
@@ -23,13 +21,10 @@
 .secondLevel {
 	margin-bottom: 10px;
 	padding: 0;
-
 	text-transform: uppercase;
-
 	color: var(--gray-dark);
 	border: none;
 	background: none;
-
 	font-size: 12px;
 	font-weight: 300;
 	line-height: 16px;
@@ -43,16 +38,13 @@
 	margin-top: 15px;
 	margin-left: 12px;
 	padding-left: 32px;
-
 	border-left: 1px solid #DFDFDF;
 }
 
 .thirdLevel {
 	display: block;
-
 	color: var(--gray-dark);
 	outline-offset: -1px;
-
 	font-size: 14px;
 	font-weight: 500;
 }

@@ -2,7 +2,6 @@
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 	gap: 20px;
-
 	align-items: start;
 }
 
@@ -27,14 +26,12 @@
 .schoolContainer {
 	display: flex;
 	flex-wrap: wrap;
-
 	margin-top: 16px;
 	gap: 16px;
 }
 
 .schoolLink {
 	transition: box-shadow 0.5s ease-in-out;
-
 	box-shadow: 0 4px 4px rgb(0 0 0 / 5%);
 }
 
