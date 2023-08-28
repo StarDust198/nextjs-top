@@ -41,6 +41,10 @@ My first app on NextJS - the course aggregator.
 
 I have learned to use NextJS and SSR, how to make components and keep the project structure clear
 
+### Known bugs
+
+If courses category button pushed during initial page loading it doesn't work
+
 ### Continued development
 
 An app made for learning purposes and portfolio so I don't think it will be developed further
